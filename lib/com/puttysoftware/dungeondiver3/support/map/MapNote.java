@@ -18,32 +18,32 @@ public class MapNote extends CloneableObject {
 
     // Constructor
     public MapNote() {
-        this.contents = "Empty Note";
+	this.contents = "Empty Note";
     }
 
     // Methods
     public String getContents() {
-        return this.contents;
+	return this.contents;
     }
 
     public void setContents(final String newContents) {
-        this.contents = newContents;
+	this.contents = newContents;
     }
 
     @Override
     public Object clone() {
-        final MapNote copy = new MapNote();
-        copy.contents = this.contents;
-        return copy;
+	final MapNote copy = new MapNote();
+	copy.contents = this.contents;
+	return copy;
     }
 
     static MapNote readNote(final XDataReader reader) throws IOException {
-        final MapNote mn = new MapNote();
-        mn.contents = reader.readString();
-        return mn;
+	final MapNote mn = new MapNote();
+	mn.contents = reader.readString();
+	return mn;
     }
 
     void writeNote(final XDataWriter writer) throws IOException {
-        writer.writeString(this.contents);
+	writer.writeString(this.contents);
     }
 }

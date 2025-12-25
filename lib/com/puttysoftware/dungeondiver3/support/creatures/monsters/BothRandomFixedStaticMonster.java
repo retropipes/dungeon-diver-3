@@ -8,11 +8,11 @@ package com.puttysoftware.dungeondiver3.support.creatures.monsters;
 class BothRandomFixedStaticMonster extends BothRandomFixedBaseMonster {
     // Constructors
     BothRandomFixedStaticMonster() {
-        super();
+	super();
     }
 
     @Override
     public boolean dynamic() {
-        return false;
+	return false;
     }
 }

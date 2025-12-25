@@ -8,11 +8,11 @@ package com.puttysoftware.dungeondiver3.support.creatures.monsters;
 abstract class FaithRandomFixedBaseMonster extends FaithRandomBaseMonster {
     // Constructors
     FaithRandomFixedBaseMonster() {
-        super();
+	super();
     }
 
     @Override
     public boolean scales() {
-        return false;
+	return false;
     }
 }

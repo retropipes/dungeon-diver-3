@@ -19,46 +19,46 @@ public class Extension {
 
     // Methods
     public static String getPreferencesExtension() {
-        return Extension.PREFERENCES_EXTENSION;
+	return Extension.PREFERENCES_EXTENSION;
     }
 
     public static String getRegistryExtensionWithPeriod() {
-        return "." + Extension.REGISTRY_EXTENSION;
+	return "." + Extension.REGISTRY_EXTENSION;
     }
 
     static String getScenarioExtensionWithPeriod() {
-        return "." + Extension.SCENARIO_EXTENSION;
+	return "." + Extension.SCENARIO_EXTENSION;
     }
 
     public static String getGameExtension() {
-        return Extension.SAVED_GAME_EXTENSION;
+	return Extension.SAVED_GAME_EXTENSION;
     }
 
     public static String getGameExtensionWithPeriod() {
-        return "." + Extension.SAVED_GAME_EXTENSION;
+	return "." + Extension.SAVED_GAME_EXTENSION;
     }
 
     public static String getCharacterExtension() {
-        return Extension.CHARACTER_EXTENSION;
+	return Extension.CHARACTER_EXTENSION;
     }
 
     public static String getCharacterExtensionWithPeriod() {
-        return "." + Extension.CHARACTER_EXTENSION;
+	return "." + Extension.CHARACTER_EXTENSION;
     }
 
     public static String getRaceExtensionWithPeriod() {
-        return "." + Extension.RACE_EXTENSION;
+	return "." + Extension.RACE_EXTENSION;
     }
 
     public static String getPersonalityExtensionWithPeriod() {
-        return "." + Extension.PERSONALITY_EXTENSION;
+	return "." + Extension.PERSONALITY_EXTENSION;
     }
 
     public static String getFaithExtensionWithPeriod() {
-        return "." + Extension.FAITH_EXTENSION;
+	return "." + Extension.FAITH_EXTENSION;
     }
 
     public static String getDescriptionExtensionWithPeriod() {
-        return "." + Extension.DESCRIPTION_EXTENSION;
+	return "." + Extension.DESCRIPTION_EXTENSION;
     }
 }

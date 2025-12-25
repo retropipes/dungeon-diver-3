@@ -21,68 +21,65 @@ public class StairsDown extends GenericTeleport {
 
     // Constructors
     public StairsDown() {
-        super();
-        this.setTemplateTransform(new TemplateTransform(1.0, 1.0, 1.0));
-        // Create post-move script
-        final InternalScript scpt = new InternalScript();
-        final InternalScriptEntry entry1 = new InternalScriptEntry();
-        entry1.setActionCode(InternalScriptActionCode.MOVE);
-        entry1.addActionArg(new InternalScriptEntryArgument(false));
-        entry1.addActionArg(new InternalScriptEntryArgument(false));
-        entry1.addActionArg(new InternalScriptEntryArgument(0));
-        entry1.addActionArg(new InternalScriptEntryArgument(0));
-        entry1.addActionArg(new InternalScriptEntryArgument(-1));
-        entry1.finalizeActionArgs();
-        scpt.addAction(entry1);
-        final InternalScriptEntry entry2 = new InternalScriptEntry();
-        entry2.setActionCode(InternalScriptActionCode.SOUND);
-        entry2.addActionArg(new InternalScriptEntryArgument(
-                GameSoundConstants.SOUND_STAIRS));
-        entry2.finalizeActionArgs();
-        scpt.addAction(entry2);
-        scpt.finalizeActions();
-        this.postMoveScript = scpt;
+	super();
+	this.setTemplateTransform(new TemplateTransform(1.0, 1.0, 1.0));
+	// Create post-move script
+	final InternalScript scpt = new InternalScript();
+	final InternalScriptEntry entry1 = new InternalScriptEntry();
+	entry1.setActionCode(InternalScriptActionCode.MOVE);
+	entry1.addActionArg(new InternalScriptEntryArgument(false));
+	entry1.addActionArg(new InternalScriptEntryArgument(false));
+	entry1.addActionArg(new InternalScriptEntryArgument(0));
+	entry1.addActionArg(new InternalScriptEntryArgument(0));
+	entry1.addActionArg(new InternalScriptEntryArgument(-1));
+	entry1.finalizeActionArgs();
+	scpt.addAction(entry1);
+	final InternalScriptEntry entry2 = new InternalScriptEntry();
+	entry2.setActionCode(InternalScriptActionCode.SOUND);
+	entry2.addActionArg(new InternalScriptEntryArgument(GameSoundConstants.SOUND_STAIRS));
+	entry2.finalizeActionArgs();
+	scpt.addAction(entry2);
+	scpt.finalizeActions();
+	this.postMoveScript = scpt;
     }
 
     @Override
     public String getName() {
-        return "Stairs Down";
+	return "Stairs Down";
     }
 
     @Override
     public String getPluralName() {
-        return "Sets of Stairs Down";
+	return "Sets of Stairs Down";
     }
 
     @Override
-    public boolean preMoveCheck(final boolean ie, final int dirX,
-            final int dirY, final int dirZ, final Map map) {
-        return Map.isFloorBelow(dirZ) && map.isMoveOK(dirX, dirY, dirZ);
+    public boolean preMoveCheck(final boolean ie, final int dirX, final int dirY, final int dirZ, final Map map) {
+	return Map.isFloorBelow(dirZ) && map.isMoveOK(dirX, dirY, dirZ);
     }
 
     @Override
-    public InternalScript getPostMoveScript(final boolean ie, final int dirX,
-            final int dirY, final int dirZ) {
-        return this.postMoveScript;
+    public InternalScript getPostMoveScript(final boolean ie, final int dirX, final int dirY, final int dirZ) {
+	return this.postMoveScript;
     }
 
     @Override
     public String getDescription() {
-        return "Stairs Down lead to the floor below.";
+	return "Stairs Down lead to the floor below.";
     }
 
     @Override
     public int getCustomFormat() {
-        return 0;
+	return 0;
     }
 
     @Override
     public int getCustomProperty(final int propID) {
-        return MapObject.DEFAULT_CUSTOM_VALUE;
+	return MapObject.DEFAULT_CUSTOM_VALUE;
     }
 
     @Override
     public void setCustomProperty(final int propID, final int value) {
-        // Do nothing
+	// Do nothing
     }
 }

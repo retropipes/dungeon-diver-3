@@ -12,20 +12,20 @@ import com.puttysoftware.dungeondiver3.support.map.generic.MapObject;
 class LowLevelDataStore extends ObjectStorage<MapObject> {
     // Constructor
     LowLevelDataStore(final int... shape) {
-        super(shape);
+	super(shape);
     }
-    
+
     // Copy constructor
-    LowLevelDataStore(final LowLevelDataStore copyFrom){
+    LowLevelDataStore(final LowLevelDataStore copyFrom) {
 	super(copyFrom);
     }
 
     // Methods
     public MapObject getMapCell(final int... loc) {
-        return this.getCell(loc);
+	return this.getCell(loc);
     }
 
     public void setMapCell(final MapObject obj, final int... loc) {
-        this.setCell(obj, loc);
+	this.setCell(obj, loc);
     }
 }

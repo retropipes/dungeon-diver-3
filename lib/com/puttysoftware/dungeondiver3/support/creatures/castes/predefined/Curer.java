@@ -10,6 +10,6 @@ import com.puttysoftware.dungeondiver3.support.creatures.castes.CasteConstants;
 
 public class Curer extends Caste {
     public Curer() {
-        super(CasteConstants.CASTE_CURER);
+	super(CasteConstants.CASTE_CURER);
     }
 }

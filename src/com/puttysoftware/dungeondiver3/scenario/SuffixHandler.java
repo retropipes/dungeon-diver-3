@@ -16,17 +16,16 @@ import com.puttysoftware.dungeondiver3.support.scenario.FormatConstants;
 
 class SuffixHandler implements SuffixIO {
     @Override
-    public void readSuffix(final XDataReader reader, final int formatVersion)
-            throws IOException {
-        if (formatVersion == FormatConstants.SCENARIO_FORMAT_1) {
-            FileHooks.loadGameHookV1(reader);
-        } else {
-            FileHooks.loadGameHook(reader);
-        }
+    public void readSuffix(final XDataReader reader, final int formatVersion) throws IOException {
+	if (formatVersion == FormatConstants.SCENARIO_FORMAT_1) {
+	    FileHooks.loadGameHookV1(reader);
+	} else {
+	    FileHooks.loadGameHook(reader);
+	}
     }
 
     @Override
     public void writeSuffix(final XDataWriter writer) throws IOException {
-        FileHooks.saveGameHook(writer);
+	FileHooks.saveGameHook(writer);
     }
 }

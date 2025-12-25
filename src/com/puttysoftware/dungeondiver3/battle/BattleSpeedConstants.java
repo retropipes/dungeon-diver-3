@@ -12,14 +12,11 @@ public class BattleSpeedConstants {
     public static final int BATTLE_SPEED_MODERATE = 700;
     private static final int BATTLE_SPEED_SLOW = 900;
     private static final int BATTLE_SPEED_VERY_SLOW = 1100;
-    public static final int[] BATTLE_SPEED_ARRAY = new int[] {
-            BattleSpeedConstants.BATTLE_SPEED_VERY_SLOW,
-            BattleSpeedConstants.BATTLE_SPEED_SLOW,
-            BattleSpeedConstants.BATTLE_SPEED_MODERATE,
-            BattleSpeedConstants.BATTLE_SPEED_FAST,
-            BattleSpeedConstants.BATTLE_SPEED_VERY_FAST };
+    public static final int[] BATTLE_SPEED_ARRAY = new int[] { BattleSpeedConstants.BATTLE_SPEED_VERY_SLOW,
+	    BattleSpeedConstants.BATTLE_SPEED_SLOW, BattleSpeedConstants.BATTLE_SPEED_MODERATE,
+	    BattleSpeedConstants.BATTLE_SPEED_FAST, BattleSpeedConstants.BATTLE_SPEED_VERY_FAST };
 
     private BattleSpeedConstants() {
-        // Do nothing
+	// Do nothing
     }
 }

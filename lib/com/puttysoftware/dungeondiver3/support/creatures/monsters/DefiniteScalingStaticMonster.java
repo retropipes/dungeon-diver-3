@@ -8,11 +8,11 @@ package com.puttysoftware.dungeondiver3.support.creatures.monsters;
 class DefiniteScalingStaticMonster extends DefiniteScalingBaseMonster {
     // Constructors
     DefiniteScalingStaticMonster() {
-        super();
+	super();
     }
 
     @Override
     public boolean dynamic() {
-        return false;
+	return false;
     }
 }

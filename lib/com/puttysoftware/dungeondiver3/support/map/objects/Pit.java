@@ -22,90 +22,83 @@ public class Pit extends StairsDown {
 
     // Constructors
     public Pit() {
-        super();
-        this.setTemplateTransform(new TemplateTransform(1.0, 1.0, 1.0));
-        // Create post-move script
-        final InternalScript scpt = new InternalScript();
-        final InternalScriptEntry entry1 = new InternalScriptEntry();
-        entry1.setActionCode(InternalScriptActionCode.MOVE);
-        entry1.addActionArg(new InternalScriptEntryArgument(false));
-        entry1.addActionArg(new InternalScriptEntryArgument(false));
-        entry1.addActionArg(new InternalScriptEntryArgument(0));
-        entry1.addActionArg(new InternalScriptEntryArgument(0));
-        entry1.addActionArg(new InternalScriptEntryArgument(-1));
-        entry1.finalizeActionArgs();
-        scpt.addAction(entry1);
-        final InternalScriptEntry entry2 = new InternalScriptEntry();
-        entry2.setActionCode(InternalScriptActionCode.SOUND);
-        entry2.addActionArg(new InternalScriptEntryArgument(
-                GameSoundConstants.SOUND_FALLING));
-        entry2.finalizeActionArgs();
-        scpt.addAction(entry2);
-        scpt.finalizeActions();
-        this.postMoveScript = scpt;
+	super();
+	this.setTemplateTransform(new TemplateTransform(1.0, 1.0, 1.0));
+	// Create post-move script
+	final InternalScript scpt = new InternalScript();
+	final InternalScriptEntry entry1 = new InternalScriptEntry();
+	entry1.setActionCode(InternalScriptActionCode.MOVE);
+	entry1.addActionArg(new InternalScriptEntryArgument(false));
+	entry1.addActionArg(new InternalScriptEntryArgument(false));
+	entry1.addActionArg(new InternalScriptEntryArgument(0));
+	entry1.addActionArg(new InternalScriptEntryArgument(0));
+	entry1.addActionArg(new InternalScriptEntryArgument(-1));
+	entry1.finalizeActionArgs();
+	scpt.addAction(entry1);
+	final InternalScriptEntry entry2 = new InternalScriptEntry();
+	entry2.setActionCode(InternalScriptActionCode.SOUND);
+	entry2.addActionArg(new InternalScriptEntryArgument(GameSoundConstants.SOUND_FALLING));
+	entry2.finalizeActionArgs();
+	scpt.addAction(entry2);
+	scpt.finalizeActions();
+	this.postMoveScript = scpt;
     }
 
     @Override
     public String getName() {
-        return "Pit";
+	return "Pit";
     }
 
     @Override
     public String getPluralName() {
-        return "Pits";
+	return "Pits";
     }
 
     @Override
-    public boolean preMoveCheck(final boolean ie, final int dirX,
-            final int dirY, final int dirZ, final Map map) {
-        return this.searchNestedPits(dirX, dirY, dirZ - 1, map);
+    public boolean preMoveCheck(final boolean ie, final int dirX, final int dirY, final int dirZ, final Map map) {
+	return this.searchNestedPits(dirX, dirY, dirZ - 1, map);
     }
 
-    private boolean searchNestedPits(final int dirX, final int dirY,
-            final int floor, final Map map) {
-        // Stop infinite recursion
-        final int lcl = -map.getFloors();
-        if (floor <= lcl) {
-            throw new InfiniteRecursionException();
-        }
-        if (map.doesFloorExist(floor)) {
-            final MapObject obj = map.getCell(dirX, dirY, floor,
-                    MapConstants.LAYER_OBJECT);
-            if (obj.isConditionallySolid(map, floor)) {
-                return false;
-            } else {
-                if (obj.getName().equals("Pit")
-                        || obj.getName().equals("Invisible Pit")) {
-                    return this.searchNestedPits(dirX, dirY, floor - 1, map);
-                } else if (obj.getName().equals("Springboard")
-                        || obj.getName().equals("Invisible Springboard")) {
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-        } else {
-            return false;
-        }
+    private boolean searchNestedPits(final int dirX, final int dirY, final int floor, final Map map) {
+	// Stop infinite recursion
+	final int lcl = -map.getFloors();
+	if (floor <= lcl) {
+	    throw new InfiniteRecursionException();
+	}
+	if (map.doesFloorExist(floor)) {
+	    final MapObject obj = map.getCell(dirX, dirY, floor, MapConstants.LAYER_OBJECT);
+	    if (obj.isConditionallySolid(map, floor)) {
+		return false;
+	    } else {
+		if (obj.getName().equals("Pit") || obj.getName().equals("Invisible Pit")) {
+		    return this.searchNestedPits(dirX, dirY, floor - 1, map);
+		} else if (obj.getName().equals("Springboard") || obj.getName().equals("Invisible Springboard")) {
+		    return false;
+		} else {
+		    return true;
+		}
+	    }
+	} else {
+	    return false;
+	}
     }
 
     @Override
-    public InternalScript getPostMoveScript(final boolean ie, final int dirX,
-            final int dirY, final int dirZ) {
-        return this.postMoveScript;
+    public InternalScript getPostMoveScript(final boolean ie, final int dirX, final int dirY, final int dirZ) {
+	return this.postMoveScript;
     }
 
     @Override
     public boolean isConditionallySolid(final Map map, final int z) {
-        if (!Map.isFloorBelow(z)) {
-            return true;
-        } else {
-            return false;
-        }
+	if (!Map.isFloorBelow(z)) {
+	    return true;
+	} else {
+	    return false;
+	}
     }
 
     @Override
     public String getDescription() {
-        return "Pits dump anything that wanders in to the floor below. If one of these is placed on the bottom-most floor, it is impassable.";
+	return "Pits dump anything that wanders in to the floor below. If one of these is placed on the bottom-most floor, it is impassable.";
     }
 }

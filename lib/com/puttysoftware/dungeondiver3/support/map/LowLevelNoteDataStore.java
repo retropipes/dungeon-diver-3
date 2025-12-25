@@ -10,9 +10,9 @@ import org.retropipes.diane.storage.ObjectStorage;
 class LowLevelNoteDataStore extends ObjectStorage<MapNote> {
     // Constructor
     LowLevelNoteDataStore(final int... shape) {
-        super(shape);
+	super(shape);
     }
-    
+
     // Copy constructor
     LowLevelNoteDataStore(final LowLevelNoteDataStore copyFrom) {
 	super(copyFrom);
@@ -20,10 +20,10 @@ class LowLevelNoteDataStore extends ObjectStorage<MapNote> {
 
     // Methods
     public MapNote getNote(final int... loc) {
-        return this.getCell(loc);
+	return this.getCell(loc);
     }
 
     public void setNote(final MapNote obj, final int... loc) {
-        this.setCell(obj, loc);
+	this.setCell(obj, loc);
     }
 }

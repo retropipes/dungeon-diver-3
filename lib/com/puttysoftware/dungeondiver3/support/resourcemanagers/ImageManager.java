@@ -22,80 +22,69 @@ public class ImageManager {
     private static final String INTERNAL_LOAD_PATH = "/com/puttysoftware/dungeondiver3/support/resources/graphics/";
     private final static Class<?> LOAD_CLASS = ImageManager.class;
 
-    private static BufferedImageIcon getImage(final String name,
-            final String rawName, final TemplateTransform tt,
-            final boolean horzflip, final boolean vertflip,
-            final boolean helpImage) {
-        return ImageCache.getCachedImage(name, rawName, tt, horzflip, vertflip,
-                helpImage);
+    private static BufferedImageIcon getImage(final String name, final String rawName, final TemplateTransform tt,
+	    final boolean horzflip, final boolean vertflip, final boolean helpImage) {
+	return ImageCache.getCachedImage(name, rawName, tt, horzflip, vertflip, helpImage);
     }
 
-    public static BufferedImageIcon getMapImage(final String name,
-            final String rawName, final TemplateTransform tt) {
-        return ImageManager.getImage(name, rawName, tt, false, false, false);
+    public static BufferedImageIcon getMapImage(final String name, final String rawName, final TemplateTransform tt) {
+	return ImageManager.getImage(name, rawName, tt, false, false, false);
     }
 
-    public static BufferedImageIcon getMapHelpImage(final String name,
-            final String rawName, final TemplateTransform tt) {
-        return ImageManager.getImage(name, rawName, tt, false, false, true);
+    public static BufferedImageIcon getMapHelpImage(final String name, final String rawName,
+	    final TemplateTransform tt) {
+	return ImageManager.getImage(name, rawName, tt, false, false, true);
     }
 
-    public static BufferedImageIcon getMonsterImage(final String name,
-            final Element element) {
-        return ImageManager.getImage(name, name, new TemplateTransform(element),
-                false, false, false);
+    public static BufferedImageIcon getMonsterImage(final String name, final Element element) {
+	return ImageManager.getImage(name, name, new TemplateTransform(element), false, false, false);
     }
 
     public static BufferedImageIcon getPlayerImage(final PartyMember base) {
-        final String[] raceNames = RaceConstants.getRaceNames();
-        final String name = raceNames[base.getRace().getRaceID()];
-        final Element element = base.getElement();
-        return ImageManager.getImage(name, name, new TemplateTransform(element),
-                false, false, false);
+	final String[] raceNames = RaceConstants.getRaceNames();
+	final String name = raceNames[base.getRace().getRaceID()];
+	final Element element = base.getElement();
+	return ImageManager.getImage(name, name, new TemplateTransform(element), false, false, false);
     }
 
     public static BufferedImageIcon getStatImage(final String name) {
-        return ImageManager.getImage(name, name, null, false, false, true);
+	return ImageManager.getImage(name, name, null, false, false, true);
     }
 
-    static BufferedImageIcon getUncachedImage(final String name,
-            final TemplateTransform tt, final boolean horzflip,
-            final boolean vertflip, final boolean helpImage) {
-        final String normalName = ImageManager.normalizeName(name);
-        try {
-            final URL url = ImageManager.LOAD_CLASS.getResource(
-                    ImageManager.INTERNAL_LOAD_PATH + normalName + ".png");
-            final BufferedImage image = ImageIO.read(url);
-            final BufferedImageIcon icon = new BufferedImageIcon(image);
-            BufferedImageIcon res = ImageTransformer
-                    .getTemplateTransformedImage(icon, tt);
-            if (horzflip) {
-                res = ImageTransformer.getHorizontallyFlippedImage(res);
-            }
-            if (vertflip) {
-                res = ImageTransformer.getVerticallyFlippedImage(res);
-            }
-            if (helpImage) {
-                res = ImageTransformer.getTransformedImage(res);
-            }
-            return res;
-        } catch (final Exception e) {
-            return null;
-        }
+    static BufferedImageIcon getUncachedImage(final String name, final TemplateTransform tt, final boolean horzflip,
+	    final boolean vertflip, final boolean helpImage) {
+	final String normalName = ImageManager.normalizeName(name);
+	try {
+	    final URL url = ImageManager.LOAD_CLASS.getResource(ImageManager.INTERNAL_LOAD_PATH + normalName + ".png");
+	    final BufferedImage image = ImageIO.read(url);
+	    final BufferedImageIcon icon = new BufferedImageIcon(image);
+	    BufferedImageIcon res = ImageTransformer.getTemplateTransformedImage(icon, tt);
+	    if (horzflip) {
+		res = ImageTransformer.getHorizontallyFlippedImage(res);
+	    }
+	    if (vertflip) {
+		res = ImageTransformer.getVerticallyFlippedImage(res);
+	    }
+	    if (helpImage) {
+		res = ImageTransformer.getTransformedImage(res);
+	    }
+	    return res;
+	} catch (final Exception e) {
+	    return null;
+	}
     }
 
     private static String normalizeName(final String name) {
-        final StringBuilder sb = new StringBuilder(name);
-        for (int x = 0; x < sb.length(); x++) {
-            if (!Character.isLetter(sb.charAt(x))
-                    && !Character.isDigit(sb.charAt(x))) {
-                sb.setCharAt(x, '_');
-            }
-        }
-        return sb.toString().toLowerCase();
+	final StringBuilder sb = new StringBuilder(name);
+	for (int x = 0; x < sb.length(); x++) {
+	    if (!Character.isLetter(sb.charAt(x)) && !Character.isDigit(sb.charAt(x))) {
+		sb.setCharAt(x, '_');
+	    }
+	}
+	return sb.toString().toLowerCase();
     }
 
     public static int getGraphicSize() {
-        return 32;
+	return 32;
     }
 }

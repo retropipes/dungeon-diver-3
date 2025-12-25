@@ -13,7 +13,7 @@ public abstract class Media extends Thread {
 
     // Constructor
     protected Media(final ThreadGroup group) {
-        super(group, "Media Player " + Media.ACTIVE_MEDIA_COUNT);
+	super(group, "Media Player " + Media.ACTIVE_MEDIA_COUNT);
     }
 
     // Methods
@@ -25,55 +25,51 @@ public abstract class Media extends Thread {
 
     // Factories
     public static Media getLoopingFile(final String file) {
-        return Media.provisionMedia(new MusicFile(Media.MEDIA_GROUP, file,
-                Media.ACTIVE_MEDIA_COUNT));
+	return Media.provisionMedia(new MusicFile(Media.MEDIA_GROUP, file, Media.ACTIVE_MEDIA_COUNT));
     }
 
     public static Media getLoopingResource(final URL resource) {
-        return Media.provisionMedia(new MusicResource(Media.MEDIA_GROUP,
-                resource, Media.ACTIVE_MEDIA_COUNT));
+	return Media.provisionMedia(new MusicResource(Media.MEDIA_GROUP, resource, Media.ACTIVE_MEDIA_COUNT));
     }
 
     public static Media getNonLoopingFile(final String file) {
-        return Media.provisionMedia(new SoundFile(Media.MEDIA_GROUP, file,
-                Media.ACTIVE_MEDIA_COUNT));
+	return Media.provisionMedia(new SoundFile(Media.MEDIA_GROUP, file, Media.ACTIVE_MEDIA_COUNT));
     }
 
     public static Media getNonLoopingResource(final URL resource) {
-        return Media.provisionMedia(new SoundResource(Media.MEDIA_GROUP,
-                resource, Media.ACTIVE_MEDIA_COUNT));
+	return Media.provisionMedia(new SoundResource(Media.MEDIA_GROUP, resource, Media.ACTIVE_MEDIA_COUNT));
     }
 
     private static Media provisionMedia(final Media src) {
-        if (Media.ACTIVE_MEDIA_COUNT >= Media.MAX_MEDIA_ACTIVE) {
-            Media.killAllMediaPlayers();
-        }
-        try {
-            if (src != null) {
-                src.setUncaughtExceptionHandler(Media.meh);
-                Media.ACTIVE_MEDIA[Media.ACTIVE_MEDIA_COUNT] = src;
-                Media.ACTIVE_MEDIA_COUNT++;
-            }
-        } catch (final ArrayIndexOutOfBoundsException aioob) {
-            // Do nothing
-        }
-        return src;
+	if (Media.ACTIVE_MEDIA_COUNT >= Media.MAX_MEDIA_ACTIVE) {
+	    Media.killAllMediaPlayers();
+	}
+	try {
+	    if (src != null) {
+		src.setUncaughtExceptionHandler(Media.meh);
+		Media.ACTIVE_MEDIA[Media.ACTIVE_MEDIA_COUNT] = src;
+		Media.ACTIVE_MEDIA_COUNT++;
+	    }
+	} catch (final ArrayIndexOutOfBoundsException aioob) {
+	    // Do nothing
+	}
+	return src;
     }
 
     private static void killAllMediaPlayers() {
-        Media.MEDIA_GROUP.interrupt();
+	Media.MEDIA_GROUP.interrupt();
     }
 
     static synchronized void taskCompleted(final int taskNum) {
-        Media.ACTIVE_MEDIA[taskNum] = null;
-        for (int z = taskNum + 1; z < Media.ACTIVE_MEDIA.length; z++) {
-            if (Media.ACTIVE_MEDIA[z] != null) {
-                Media.ACTIVE_MEDIA[z - 1] = Media.ACTIVE_MEDIA[z];
-                if (Media.ACTIVE_MEDIA[z - 1].isAlive()) {
-                    Media.ACTIVE_MEDIA[z - 1].updateNumber(z - 1);
-                }
-            }
-        }
-        Media.ACTIVE_MEDIA_COUNT--;
+	Media.ACTIVE_MEDIA[taskNum] = null;
+	for (int z = taskNum + 1; z < Media.ACTIVE_MEDIA.length; z++) {
+	    if (Media.ACTIVE_MEDIA[z] != null) {
+		Media.ACTIVE_MEDIA[z - 1] = Media.ACTIVE_MEDIA[z];
+		if (Media.ACTIVE_MEDIA[z - 1].isAlive()) {
+		    Media.ACTIVE_MEDIA[z - 1].updateNumber(z - 1);
+		}
+	    }
+	}
+	Media.ACTIVE_MEDIA_COUNT--;
     }
 }

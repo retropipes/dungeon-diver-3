@@ -12,48 +12,48 @@ import com.puttysoftware.dungeondiver3.support.map.generic.TypeConstants;
 public class Wall extends GenericWall {
     // Constructors
     public Wall() {
-        super();
+	super();
     }
 
     @Override
     public String getName() {
-        return "Wall";
+	return "Wall";
     }
 
     @Override
     public String getPluralName() {
-        return "Walls";
+	return "Walls";
     }
 
     @Override
     public String getDescription() {
-        return "Walls are impassable - you'll need to go around them.";
+	return "Walls are impassable - you'll need to go around them.";
     }
 
     @Override
     protected void setTypes() {
-        this.type.set(TypeConstants.TYPE_PLAIN_WALL);
-        this.type.set(TypeConstants.TYPE_WALL);
+	this.type.set(TypeConstants.TYPE_PLAIN_WALL);
+	this.type.set(TypeConstants.TYPE_WALL);
     }
 
     @Override
     public int getMinimumRequiredQuantityInBattle(final Map map) {
-        final int regionSizeSquared = map.getRegionSize() ^ 2;
-        final int mapSize = map.getRows() * map.getColumns();
-        final int regionsPerMap = mapSize / regionSizeSquared;
-        return regionsPerMap / (int) Math.sqrt(Math.sqrt(mapSize));
+	final int regionSizeSquared = map.getRegionSize() ^ 2;
+	final int mapSize = map.getRows() * map.getColumns();
+	final int regionsPerMap = mapSize / regionSizeSquared;
+	return regionsPerMap / (int) Math.sqrt(Math.sqrt(mapSize));
     }
 
     @Override
     public int getMaximumRequiredQuantityInBattle(final Map map) {
-        final int regionSizeSquared = map.getRegionSize() ^ 2;
-        final int mapSize = map.getRows() * map.getColumns();
-        final int regionsPerMap = mapSize / regionSizeSquared;
-        return regionsPerMap / (int) Math.sqrt(mapSize);
+	final int regionSizeSquared = map.getRegionSize() ^ 2;
+	final int mapSize = map.getRows() * map.getColumns();
+	final int regionsPerMap = mapSize / regionSizeSquared;
+	return regionsPerMap / (int) Math.sqrt(mapSize);
     }
 
     @Override
     public boolean isRequiredInBattle() {
-        return true;
+	return true;
     }
 }

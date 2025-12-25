@@ -8,11 +8,11 @@ package com.puttysoftware.dungeondiver3.support.creatures.monsters;
 class FaithRandomScalingDynamicMonster extends FaithRandomScalingBaseMonster {
     // Constructors
     FaithRandomScalingDynamicMonster() {
-        super();
+	super();
     }
 
     @Override
     public boolean dynamic() {
-        return true;
+	return true;
     }
 }

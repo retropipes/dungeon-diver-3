@@ -12,6 +12,6 @@ import com.puttysoftware.dungeondiver3.support.map.generic.GenericTransientObjec
 public class Arrow extends GenericTransientObject {
     // Constructors
     public Arrow(final Color c) {
-        super("Arrow", c);
+	super("Arrow", c);
     }
 }

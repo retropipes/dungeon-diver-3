@@ -24,61 +24,61 @@ public class DungeonDiver3 {
 
     // Methods
     public static Application getApplication() {
-        return DungeonDiver3.application;
+	return DungeonDiver3.application;
     }
-    
+
     public static void logError(final Throwable t) {
 	CommonDialogs.showErrorDialog(DungeonDiver3.ERROR_MESSAGE);
 	Diane.handleError(t);
     }
-    
+
     public static void logWarning(final Throwable t) {
 	Diane.handleWarning(t);
     }
 
     public static String getProgramName() {
-        return DungeonDiver3.PROGRAM_NAME;
+	return DungeonDiver3.PROGRAM_NAME;
     }
 
     public static void newScenario() {
-        if (Support.getScenario() != null) {
-            // Check character writeback
-            if (PreferencesManager.areCharacterChangesPermanent()) {
-                PartyManager.writebackCharacters();
-            }
-            Support.deleteScenario();
-            DungeonDiver3.application.getScenarioManager().setMap(null);
-        }
-        Support.createScenario();
-        PartyManager.revivePartyFully();
+	if (Support.getScenario() != null) {
+	    // Check character writeback
+	    if (PreferencesManager.areCharacterChangesPermanent()) {
+		PartyManager.writebackCharacters();
+	    }
+	    Support.deleteScenario();
+	    DungeonDiver3.application.getScenarioManager().setMap(null);
+	}
+	Support.createScenario();
+	PartyManager.revivePartyFully();
     }
 
     public static void main(final String[] args) {
-        try {
-            String suffix;
-            if (Support.inDebugMode()) {
-                suffix = " (DEBUG)";
-            } else {
-                suffix = "";
-            }
-            // Integrate with host platform
-            var i = Integration.integrate();
-            // Set defaults
-            CommonDialogs.setDefaultTitle(DungeonDiver3.PROGRAM_NAME + suffix);
-            CommonDialogs.setIcon(LogoManager.getMicroLogo());
-            // Initialization
-            Support.preInit();
-            DungeonDiver3.application = new Application();
-            DungeonDiver3.application.postConstruct();
-            Application.playLogoSound();
-            DungeonDiver3.application.getGUIManager().showGUI();
-            // Register platform hooks
-            i.setAboutHandler(DungeonDiver3.application.getAboutDialog());
-            i.setOpenFileHandler(DungeonDiver3.application.getScenarioManager());
-            i.setPreferencesHandler(new PreferencesLauncher());
-            i.setQuitHandler(DungeonDiver3.application.getGUIManager());
-        } catch (final Throwable t) {
-            DungeonDiver3.logError(t);
-        }
+	try {
+	    String suffix;
+	    if (Support.inDebugMode()) {
+		suffix = " (DEBUG)";
+	    } else {
+		suffix = "";
+	    }
+	    // Integrate with host platform
+	    var i = Integration.integrate();
+	    // Set defaults
+	    CommonDialogs.setDefaultTitle(DungeonDiver3.PROGRAM_NAME + suffix);
+	    CommonDialogs.setIcon(LogoManager.getMicroLogo());
+	    // Initialization
+	    Support.preInit();
+	    DungeonDiver3.application = new Application();
+	    DungeonDiver3.application.postConstruct();
+	    Application.playLogoSound();
+	    DungeonDiver3.application.getGUIManager().showGUI();
+	    // Register platform hooks
+	    i.setAboutHandler(DungeonDiver3.application.getAboutDialog());
+	    i.setOpenFileHandler(DungeonDiver3.application.getScenarioManager());
+	    i.setPreferencesHandler(new PreferencesLauncher());
+	    i.setQuitHandler(DungeonDiver3.application.getGUIManager());
+	} catch (final Throwable t) {
+	    DungeonDiver3.logError(t);
+	}
     }
 }

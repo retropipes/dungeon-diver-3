@@ -30,58 +30,55 @@ public class AboutDialog implements AboutHandler {
 
     // Constructors
     AboutDialog(final String ver) {
-        this.setUpGUI(ver);
+	this.setUpGUI(ver);
     }
 
     // Methods
     public void showAboutDialog() {
-        this.aboutFrame.setVisible(true);
+	this.aboutFrame.setVisible(true);
     }
 
     void hideAboutDialog() {
-        this.aboutFrame.setVisible(false);
+	this.aboutFrame.setVisible(false);
     }
 
     private void setUpGUI(final String ver) {
-        String suffix;
-        if (Support.inDebugMode()) {
-            suffix = " (DEBUG)";
-        } else {
-            suffix = "";
-        }
-        final EventHandler handler = new EventHandler();
-        this.aboutFrame = new JFrame("About DungeonDiver3" + suffix);
-        final Image iconlogo = Application.getIconLogo();
-        this.aboutFrame.setIconImage(iconlogo);
-        final Container aboutPane = new Container();
-        final Container textPane = new Container();
-        final Container buttonPane = new Container();
-        final Container logoPane = new Container();
-        final JButton aboutOK = new JButton("OK");
-        final JLabel miniLabel = new JLabel("", LogoManager.getMiniatureLogo(),
-                SwingConstants.LEFT);
-        aboutOK.setDefaultCapable(true);
-        this.aboutFrame.getRootPane().setDefaultButton(aboutOK);
-        this.aboutFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-        aboutPane.setLayout(new BorderLayout());
-        logoPane.setLayout(new FlowLayout());
-        logoPane.add(miniLabel);
-        textPane.setLayout(new GridLayout(4, 1));
-        textPane.add(new JLabel("DungeonDiver3 Version: " + ver));
-        textPane.add(new JLabel("Author: Eric Ahnell"));
-        textPane.add(new JLabel(
-                "Web Site: http://www.puttysoftware.com/dungeondiver3/"));
-        textPane.add(new JLabel(
-                "E-mail bug reports to: products@puttysoftware.com  "));
-        buttonPane.setLayout(new FlowLayout());
-        buttonPane.add(aboutOK);
-        aboutPane.add(logoPane, BorderLayout.WEST);
-        aboutPane.add(textPane, BorderLayout.CENTER);
-        aboutPane.add(buttonPane, BorderLayout.SOUTH);
-        this.aboutFrame.setResizable(false);
-        aboutOK.addActionListener(handler);
-        this.aboutFrame.setContentPane(aboutPane);
-        this.aboutFrame.pack();
+	String suffix;
+	if (Support.inDebugMode()) {
+	    suffix = " (DEBUG)";
+	} else {
+	    suffix = "";
+	}
+	final EventHandler handler = new EventHandler();
+	this.aboutFrame = new JFrame("About DungeonDiver3" + suffix);
+	final Image iconlogo = Application.getIconLogo();
+	this.aboutFrame.setIconImage(iconlogo);
+	final Container aboutPane = new Container();
+	final Container textPane = new Container();
+	final Container buttonPane = new Container();
+	final Container logoPane = new Container();
+	final JButton aboutOK = new JButton("OK");
+	final JLabel miniLabel = new JLabel("", LogoManager.getMiniatureLogo(), SwingConstants.LEFT);
+	aboutOK.setDefaultCapable(true);
+	this.aboutFrame.getRootPane().setDefaultButton(aboutOK);
+	this.aboutFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+	aboutPane.setLayout(new BorderLayout());
+	logoPane.setLayout(new FlowLayout());
+	logoPane.add(miniLabel);
+	textPane.setLayout(new GridLayout(4, 1));
+	textPane.add(new JLabel("DungeonDiver3 Version: " + ver));
+	textPane.add(new JLabel("Author: Eric Ahnell"));
+	textPane.add(new JLabel("Web Site: http://www.puttysoftware.com/dungeondiver3/"));
+	textPane.add(new JLabel("E-mail bug reports to: products@puttysoftware.com  "));
+	buttonPane.setLayout(new FlowLayout());
+	buttonPane.add(aboutOK);
+	aboutPane.add(logoPane, BorderLayout.WEST);
+	aboutPane.add(textPane, BorderLayout.CENTER);
+	aboutPane.add(buttonPane, BorderLayout.SOUTH);
+	this.aboutFrame.setResizable(false);
+	aboutOK.addActionListener(handler);
+	this.aboutFrame.setContentPane(aboutPane);
+	this.aboutFrame.pack();
     }
 
     @Override
@@ -90,22 +87,22 @@ public class AboutDialog implements AboutHandler {
     }
 
     private class EventHandler implements ActionListener {
-        public EventHandler() {
-            // TODO Auto-generated constructor stub
-        }
+	public EventHandler() {
+	    // TODO Auto-generated constructor stub
+	}
 
-        // Handle buttons
-        @Override
-        public void actionPerformed(final ActionEvent e) {
-            try {
-                final AboutDialog ad = AboutDialog.this;
-                final String cmd = e.getActionCommand();
-                if (cmd.equals("OK")) {
-                    ad.hideAboutDialog();
-                }
-            } catch (final Exception ex) {
-                DungeonDiver3.logError(ex);
-            }
-        }
+	// Handle buttons
+	@Override
+	public void actionPerformed(final ActionEvent e) {
+	    try {
+		final AboutDialog ad = AboutDialog.this;
+		final String cmd = e.getActionCommand();
+		if (cmd.equals("OK")) {
+		    ad.hideAboutDialog();
+		}
+	    } catch (final Exception ex) {
+		DungeonDiver3.logError(ex);
+	    }
+	}
     }
 }

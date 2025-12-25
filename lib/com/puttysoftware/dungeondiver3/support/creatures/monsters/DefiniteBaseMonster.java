@@ -12,32 +12,31 @@ import com.puttysoftware.dungeondiver3.support.resourcemanagers.ImageManager;
 abstract class DefiniteBaseMonster extends BaseMonster {
     // Constructors
     DefiniteBaseMonster() {
-        super();
+	super();
     }
 
     @Override
     public boolean randomAppearance() {
-        return false;
+	return false;
     }
 
     @Override
     public boolean randomFaith() {
-        return false;
+	return false;
     }
 
     // Helper Methods
     @Override
     protected BufferedImageIcon getInitialImage() {
-        if (this.getLevel() == 0) {
-            return null;
-        } else {
-            return ImageManager.getMonsterImage(this.getType(),
-                    this.getElement());
-        }
+	if (this.getLevel() == 0) {
+	    return null;
+	} else {
+	    return ImageManager.getMonsterImage(this.getType(), this.getElement());
+	}
     }
 
     @Override
     public void loadMonster() {
-        this.image = this.getInitialImage();
+	this.image = this.getInitialImage();
     }
 }

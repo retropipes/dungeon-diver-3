@@ -27,8 +27,7 @@ import com.puttysoftware.dungeondiver3.support.scripts.internal.InternalScriptAc
 import com.puttysoftware.dungeondiver3.support.scripts.internal.InternalScriptEntry;
 import com.puttysoftware.dungeondiver3.support.scripts.internal.InternalScriptEntryArgument;
 
-public abstract class MapObject extends CloneableObject
-        implements TypeConstants, RandomGenerationRule {
+public abstract class MapObject extends CloneableObject implements TypeConstants, RandomGenerationRule {
     // Properties
     private boolean solid;
     private boolean blocksLOS;
@@ -41,122 +40,119 @@ public abstract class MapObject extends CloneableObject
 
     // Constructors
     MapObject(final boolean isSolid) {
-        this.solid = isSolid;
-        this.blocksLOS = false;
-        this.tt = new TemplateTransform(Color.white);
-        this.type = new BitSet(TypeConstants.TYPES_COUNT);
-        this.setTypes();
+	this.solid = isSolid;
+	this.blocksLOS = false;
+	this.tt = new TemplateTransform(Color.white);
+	this.type = new BitSet(TypeConstants.TYPES_COUNT);
+	this.setTypes();
     }
 
     public MapObject() {
-        this.solid = false;
-        this.blocksLOS = false;
-        this.tt = new TemplateTransform(Color.white);
-        this.type = new BitSet(TypeConstants.TYPES_COUNT);
-        this.setTypes();
+	this.solid = false;
+	this.blocksLOS = false;
+	this.tt = new TemplateTransform(Color.white);
+	this.type = new BitSet(TypeConstants.TYPES_COUNT);
+	this.setTypes();
     }
 
     // Methods
     @Override
     public MapObject clone() {
-        try {
-            final MapObject copy = this.getClass().getConstructor().newInstance();
-            copy.solid = this.solid;
-            copy.type = (BitSet) this.type.clone();
-            copy.blocksLOS = this.blocksLOS;
-            if (this.ruleSet != null) {
-                copy.ruleSet = this.ruleSet.clone();
-            }
-            return copy;
-        } catch (final InstantiationException | IllegalAccessException
-                | IllegalArgumentException | InvocationTargetException
-                | NoSuchMethodException | SecurityException e) {
-            Support.logError(e);
-            return null;
-        }
+	try {
+	    final MapObject copy = this.getClass().getConstructor().newInstance();
+	    copy.solid = this.solid;
+	    copy.type = (BitSet) this.type.clone();
+	    copy.blocksLOS = this.blocksLOS;
+	    if (this.ruleSet != null) {
+		copy.ruleSet = this.ruleSet.clone();
+	    }
+	    return copy;
+	} catch (final InstantiationException | IllegalAccessException | IllegalArgumentException
+		| InvocationTargetException | NoSuchMethodException | SecurityException e) {
+	    Support.logError(e);
+	    return null;
+	}
     }
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + (this.blocksLOS ? 1231 : 1237);
-        result = prime * result
-                + (this.ruleSet == null ? 0 : this.ruleSet.hashCode());
-        result = prime * result
-                + (this.saved == null ? 0 : this.saved.hashCode());
-        result = prime * result + (this.solid ? 1231 : 1237);
-        result = prime * result + (this.tt == null ? 0 : this.tt.hashCode());
-        return prime * result + (this.type == null ? 0 : this.type.hashCode());
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + (this.blocksLOS ? 1231 : 1237);
+	result = prime * result + (this.ruleSet == null ? 0 : this.ruleSet.hashCode());
+	result = prime * result + (this.saved == null ? 0 : this.saved.hashCode());
+	result = prime * result + (this.solid ? 1231 : 1237);
+	result = prime * result + (this.tt == null ? 0 : this.tt.hashCode());
+	return prime * result + (this.type == null ? 0 : this.type.hashCode());
     }
 
     @Override
     public boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (!(obj instanceof MapObject)) {
-            return false;
-        }
-        final MapObject other = (MapObject) obj;
-        if (this.blocksLOS != other.blocksLOS) {
-            return false;
-        }
-        if (this.ruleSet == null) {
-            if (other.ruleSet != null) {
-                return false;
-            }
-        } else if (!this.ruleSet.equals(other.ruleSet)) {
-            return false;
-        }
-        if (this.saved == null) {
-            if (other.saved != null) {
-                return false;
-            }
-        } else if (!this.saved.equals(other.saved)) {
-            return false;
-        }
-        if (this.solid != other.solid) {
-            return false;
-        }
-        if (this.tt == null) {
-            if (other.tt != null) {
-                return false;
-            }
-        } else if (!this.tt.equals(other.tt)) {
-            return false;
-        }
-        if (this.type == null) {
-            if (other.type != null) {
-                return false;
-            }
-        } else if (!this.type.equals(other.type)) {
-            return false;
-        }
-        return true;
+	if (this == obj) {
+	    return true;
+	}
+	if (obj == null) {
+	    return false;
+	}
+	if (!(obj instanceof MapObject)) {
+	    return false;
+	}
+	final MapObject other = (MapObject) obj;
+	if (this.blocksLOS != other.blocksLOS) {
+	    return false;
+	}
+	if (this.ruleSet == null) {
+	    if (other.ruleSet != null) {
+		return false;
+	    }
+	} else if (!this.ruleSet.equals(other.ruleSet)) {
+	    return false;
+	}
+	if (this.saved == null) {
+	    if (other.saved != null) {
+		return false;
+	    }
+	} else if (!this.saved.equals(other.saved)) {
+	    return false;
+	}
+	if (this.solid != other.solid) {
+	    return false;
+	}
+	if (this.tt == null) {
+	    if (other.tt != null) {
+		return false;
+	    }
+	} else if (!this.tt.equals(other.tt)) {
+	    return false;
+	}
+	if (this.type == null) {
+	    if (other.type != null) {
+		return false;
+	    }
+	} else if (!this.type.equals(other.type)) {
+	    return false;
+	}
+	return true;
     }
 
     public final MapObject getSavedObject() {
-        return this.saved;
+	return this.saved;
     }
 
     public final void setSavedObject(final MapObject newSaved) {
-        this.saved = newSaved;
+	this.saved = newSaved;
     }
 
     final TemplateTransform getTemplateTransform() {
-        return this.tt;
+	return this.tt;
     }
 
     public TemplateTransform getGameTemplateTransform() {
-        return this.tt;
+	return this.tt;
     }
 
     protected final void setTemplateTransform(final TemplateTransform newTT) {
-        this.tt = newTT;
+	this.tt = newTT;
     }
 
     /**
@@ -166,32 +162,32 @@ public abstract class MapObject extends CloneableObject
      * @return
      */
     public boolean isConditionallySolid(final Map map, final int z) {
-        return this.solid;
+	return this.solid;
     }
 
     public final boolean isSolid() {
-        return this.solid;
+	return this.solid;
     }
 
     public final boolean isSightBlocking() {
-        return this.blocksLOS;
+	return this.blocksLOS;
     }
 
     protected final void setSightBlocking(final boolean sb) {
-        this.blocksLOS = sb;
+	this.blocksLOS = sb;
     }
 
     public final boolean isSolidInBattle() {
-        // Handle disabled objects
-        if (this.enabledInBattle()) {
-            return this.solid;
-        } else {
-            return false;
-        }
+	// Handle disabled objects
+	if (this.enabledInBattle()) {
+	    return this.solid;
+	} else {
+	    return false;
+	}
     }
 
     public final boolean isOfType(final int testType) {
-        return this.type.get(testType);
+	return this.type.get(testType);
     }
 
     protected abstract void setTypes();
@@ -206,13 +202,12 @@ public abstract class MapObject extends CloneableObject
      * @param map
      * @return
      */
-    public boolean preMoveCheck(final boolean ie, final int dirX,
-            final int dirY, final int dirZ, final Map map) {
-        return true;
+    public boolean preMoveCheck(final boolean ie, final int dirX, final int dirY, final int dirZ, final Map map) {
+	return true;
     }
 
     public final boolean arrowHitCheck() {
-        return !this.isSolid();
+	return !this.isSolid();
     }
 
     /**
@@ -223,17 +218,15 @@ public abstract class MapObject extends CloneableObject
      * @param dirZ
      * @return
      */
-    public InternalScript getPostMoveScript(final boolean ie, final int dirX,
-            final int dirY, final int dirZ) {
-        final InternalScript scpt = new InternalScript();
-        final InternalScriptEntry act0 = new InternalScriptEntry();
-        act0.setActionCode(InternalScriptActionCode.SOUND);
-        act0.addActionArg(
-                new InternalScriptEntryArgument(GameSoundConstants.SOUND_STEP));
-        act0.finalizeActionArgs();
-        scpt.addAction(act0);
-        scpt.finalizeActions();
-        return scpt;
+    public InternalScript getPostMoveScript(final boolean ie, final int dirX, final int dirY, final int dirZ) {
+	final InternalScript scpt = new InternalScript();
+	final InternalScriptEntry act0 = new InternalScriptEntry();
+	act0.setActionCode(InternalScriptActionCode.SOUND);
+	act0.addActionArg(new InternalScriptEntryArgument(GameSoundConstants.SOUND_STEP));
+	act0.finalizeActionArgs();
+	scpt.addAction(act0);
+	scpt.finalizeActions();
+	return scpt;
     }
 
     /**
@@ -241,9 +234,8 @@ public abstract class MapObject extends CloneableObject
      * @param invoker
      * @return
      */
-    public InternalScript getBattlePostMoveScript(
-            final BattleCharacter invoker) {
-        return null;
+    public InternalScript getBattlePostMoveScript(final BattleCharacter invoker) {
+	return null;
     }
 
     /**
@@ -254,22 +246,21 @@ public abstract class MapObject extends CloneableObject
      * @param dirZ
      * @return
      */
-    public final static InternalScript getMoveFailedScript(final boolean ie,
-            final int dirX, final int dirY, final int dirZ) {
-        final InternalScript scpt = new InternalScript();
-        final InternalScriptEntry act0 = new InternalScriptEntry();
-        act0.setActionCode(InternalScriptActionCode.SOUND);
-        act0.addActionArg(
-                new InternalScriptEntryArgument(GameSoundConstants.SOUND_OOF));
-        act0.finalizeActionArgs();
-        scpt.addAction(act0);
-        final InternalScriptEntry act1 = new InternalScriptEntry();
-        act1.setActionCode(InternalScriptActionCode.MESSAGE);
-        act1.addActionArg(new InternalScriptEntryArgument("Can't go that way"));
-        act1.finalizeActionArgs();
-        scpt.addAction(act1);
-        scpt.finalizeActions();
-        return scpt;
+    public final static InternalScript getMoveFailedScript(final boolean ie, final int dirX, final int dirY,
+	    final int dirZ) {
+	final InternalScript scpt = new InternalScript();
+	final InternalScriptEntry act0 = new InternalScriptEntry();
+	act0.setActionCode(InternalScriptActionCode.SOUND);
+	act0.addActionArg(new InternalScriptEntryArgument(GameSoundConstants.SOUND_OOF));
+	act0.finalizeActionArgs();
+	scpt.addAction(act0);
+	final InternalScriptEntry act1 = new InternalScriptEntry();
+	act1.setActionCode(InternalScriptActionCode.MESSAGE);
+	act1.addActionArg(new InternalScriptEntryArgument("Can't go that way"));
+	act1.finalizeActionArgs();
+	scpt.addAction(act1);
+	scpt.finalizeActions();
+	return scpt;
     }
 
     /**
@@ -280,42 +271,40 @@ public abstract class MapObject extends CloneableObject
      * @param map
      * @return
      */
-    public String gameRenderHook(final int x, final int y, final int z,
-            final Map map) {
-        return this.getGameCacheName();
+    public String gameRenderHook(final int x, final int y, final int z, final Map map) {
+	return this.getGameCacheName();
     }
 
     public BufferedImageIcon battleRenderHook() {
-        return ImageManager.getMapImage(this.getGameCacheName(),
-                this.getBattleName(), this.tt);
+	return ImageManager.getMapImage(this.getGameCacheName(), this.getBattleName(), this.tt);
     }
 
     public boolean defersSetProperties() {
-        return false;
+	return false;
     }
 
     public boolean overridesDefaultPostMove() {
-        return false;
+	return false;
     }
 
     public final static int getBattleMoveSoundID() {
-        return GameSoundConstants.SOUND_STEP;
+	return GameSoundConstants.SOUND_STEP;
     }
 
     private final String getBattleName() {
-        if (this.enabledInBattle()) {
-            return this.getBattleNameHook();
-        } else {
-            return "Empty";
-        }
+	if (this.enabledInBattle()) {
+	    return this.getBattleNameHook();
+	} else {
+	    return "Empty";
+	}
     }
 
     private final String getBattleNameHook() {
-        return this.getName();
+	return this.getName();
     }
 
     public String getGameName() {
-        return this.getName();
+	return this.getName();
     }
 
     /**
@@ -325,47 +314,46 @@ public abstract class MapObject extends CloneableObject
      * @param z
      * @param map
      */
-    public void determineCurrentAppearance(final int x, final int y,
-            final int z, final Map map) {
-        // Do nothing
+    public void determineCurrentAppearance(final int x, final int y, final int z, final Map map) {
+	// Do nothing
     }
 
     public boolean hideFromHelp() {
-        return false;
+	return false;
     }
 
     abstract public String getName();
 
     private final String getGameImageName() {
-        return this.getGameImageNameHook();
+	return this.getGameImageNameHook();
     }
 
     private final String getGameCacheName() {
-        return this.getGameImageName();
+	return this.getGameImageName();
     }
 
     final String getEditorImageName() {
-        return this.getEditorImageNameHook();
+	return this.getEditorImageNameHook();
     }
 
     protected String getGameImageNameHook() {
-        return this.getGameName();
+	return this.getGameName();
     }
 
     protected String getEditorImageNameHook() {
-        return this.getName();
+	return this.getName();
     }
 
     private final String getIdentifier() {
-        return this.getName();
+	return this.getName();
     }
 
     public boolean enabledInBattle() {
-        return true;
+	return true;
     }
 
     public final static int getBattleAPCost() {
-        return 1;
+	return 1;
     }
 
     abstract public String getPluralName();
@@ -379,119 +367,117 @@ public abstract class MapObject extends CloneableObject
     abstract public void setCustomProperty(int propID, int value);
 
     public int getCustomFormat() {
-        return 0;
+	return 0;
     }
 
     @Override
-    public boolean shouldGenerateObject(final Map map, final int row,
-            final int col, final int floor, final int level, final int layer) {
-        if (layer == MapConstants.LAYER_OBJECT) {
-            // Handle object layer
-            if (!this.isOfType(TypeConstants.TYPE_PASS_THROUGH)) {
-                // Limit generation of other objects to 20%, unless required
-                if (this.isRequired()) {
-                    return true;
-                } else {
-                    final RandomRange r = new RandomRange(1, 100);
-                    if (r.generate() <= 20) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
-            } else {
-                // Generate pass-through objects at 100%
-                return true;
-            }
-        } else {
-            // Handle ground layer
-            if (this.isOfType(TypeConstants.TYPE_FIELD)) {
-                // Limit generation of fields to 20%
-                final RandomRange r = new RandomRange(1, 100);
-                if (r.generate() <= 20) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else {
-                // Generate other ground at 100%
-                return true;
-            }
-        }
+    public boolean shouldGenerateObject(final Map map, final int row, final int col, final int floor, final int level,
+	    final int layer) {
+	if (layer == MapConstants.LAYER_OBJECT) {
+	    // Handle object layer
+	    if (!this.isOfType(TypeConstants.TYPE_PASS_THROUGH)) {
+		// Limit generation of other objects to 20%, unless required
+		if (this.isRequired()) {
+		    return true;
+		} else {
+		    final RandomRange r = new RandomRange(1, 100);
+		    if (r.generate() <= 20) {
+			return true;
+		    } else {
+			return false;
+		    }
+		}
+	    } else {
+		// Generate pass-through objects at 100%
+		return true;
+	    }
+	} else {
+	    // Handle ground layer
+	    if (this.isOfType(TypeConstants.TYPE_FIELD)) {
+		// Limit generation of fields to 20%
+		final RandomRange r = new RandomRange(1, 100);
+		if (r.generate() <= 20) {
+		    return true;
+		} else {
+		    return false;
+		}
+	    } else {
+		// Generate other ground at 100%
+		return true;
+	    }
+	}
     }
 
     @Override
     public int getMinimumRequiredQuantity(final Map map) {
-        return RandomGenerationRule.NO_LIMIT;
+	return RandomGenerationRule.NO_LIMIT;
     }
 
     @Override
     public int getMaximumRequiredQuantity(final Map map) {
-        return RandomGenerationRule.NO_LIMIT;
+	return RandomGenerationRule.NO_LIMIT;
     }
 
     @Override
     public boolean isRequired() {
-        return false;
+	return false;
     }
 
     @Override
-    public boolean shouldGenerateObjectInBattle(final Map map, final int row,
-            final int col, final int floor, final int level, final int layer) {
-        if (!this.enabledInBattle()) {
-            // Don't generate disabled objects
-            return false;
-        } else {
-            // Generate other objects at 100%
-            return true;
-        }
+    public boolean shouldGenerateObjectInBattle(final Map map, final int row, final int col, final int floor,
+	    final int level, final int layer) {
+	if (!this.enabledInBattle()) {
+	    // Don't generate disabled objects
+	    return false;
+	} else {
+	    // Generate other objects at 100%
+	    return true;
+	}
     }
 
     @Override
     public int getMinimumRequiredQuantityInBattle(final Map map) {
-        return RandomGenerationRule.NO_LIMIT;
+	return RandomGenerationRule.NO_LIMIT;
     }
 
     @Override
     public int getMaximumRequiredQuantityInBattle(final Map map) {
-        return RandomGenerationRule.NO_LIMIT;
+	return RandomGenerationRule.NO_LIMIT;
     }
 
     @Override
     public boolean isRequiredInBattle() {
-        return false;
+	return false;
     }
 
-    public final void writeMapObject(final XDataWriter writer)
-            throws IOException {
-        writer.writeString(this.getIdentifier());
-        final int cc = this.getCustomFormat();
-        if (cc == MapObject.CUSTOM_FORMAT_MANUAL_OVERRIDE) {
-            this.writeMapObjectHook(writer);
-        } else {
-            for (int x = 0; x < cc; x++) {
-                final int cx = this.getCustomProperty(x + 1);
-                writer.writeInt(cx);
-            }
-        }
+    public final void writeMapObject(final XDataWriter writer) throws IOException {
+	writer.writeString(this.getIdentifier());
+	final int cc = this.getCustomFormat();
+	if (cc == MapObject.CUSTOM_FORMAT_MANUAL_OVERRIDE) {
+	    this.writeMapObjectHook(writer);
+	} else {
+	    for (int x = 0; x < cc; x++) {
+		final int cx = this.getCustomProperty(x + 1);
+		writer.writeInt(cx);
+	    }
+	}
     }
 
-    final MapObject readMapObject(final XDataReader reader, final String ident,
-            final int ver) throws IOException {
-        if (ident.equals(this.getIdentifier())) {
-            final int cc = this.getCustomFormat();
-            if (cc == MapObject.CUSTOM_FORMAT_MANUAL_OVERRIDE) {
-                return this.readMapObjectHook(reader, ver);
-            } else {
-                for (int x = 0; x < cc; x++) {
-                    final int cx = reader.readInt();
-                    this.setCustomProperty(x + 1, cx);
-                }
-            }
-            return this;
-        } else {
-            return null;
-        }
+    final MapObject readMapObject(final XDataReader reader, final String ident, final int ver) throws IOException {
+	if (ident.equals(this.getIdentifier())) {
+	    final int cc = this.getCustomFormat();
+	    if (cc == MapObject.CUSTOM_FORMAT_MANUAL_OVERRIDE) {
+		return this.readMapObjectHook(reader, ver);
+	    } else {
+		for (int x = 0; x < cc; x++) {
+		    final int cx = reader.readInt();
+		    this.setCustomProperty(x + 1, cx);
+		}
+	    }
+	    return this;
+	} else {
+	    return null;
+	}
     }
 
     /**
@@ -499,9 +485,8 @@ public abstract class MapObject extends CloneableObject
      * @param writer
      * @throws IOException
      */
-    protected void writeMapObjectHook(final XDataWriter writer)
-            throws IOException {
-        // Do nothing - but let subclasses override
+    protected void writeMapObjectHook(final XDataWriter writer) throws IOException {
+	// Do nothing - but let subclasses override
     }
 
     /**
@@ -511,9 +496,8 @@ public abstract class MapObject extends CloneableObject
      * @return
      * @throws IOException
      */
-    protected MapObject readMapObjectHook(final XDataReader reader,
-            final int formatVersion) throws IOException {
-        // Dummy implementation, subclasses can override
-        return this;
+    protected MapObject readMapObjectHook(final XDataReader reader, final int formatVersion) throws IOException {
+	// Dummy implementation, subclasses can override
+	return this;
     }
 }

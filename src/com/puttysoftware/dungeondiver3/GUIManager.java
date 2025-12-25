@@ -38,86 +38,82 @@ public class GUIManager implements QuitHandler {
 
     // Constructors
     public GUIManager() {
-        final CloseHandler cHandler = new CloseHandler();
-        if (Support.inDebugMode()) {
-            this.guiFrame = new JFrame(
-                    DungeonDiver3.getProgramName() + " (DEBUG)");
-        } else {
-            this.guiFrame = new JFrame(DungeonDiver3.getProgramName());
-        }
-        final Container guiPane = this.guiFrame.getContentPane();
-        this.guiFrame
-                .setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        this.guiFrame.setLayout(new GridLayout(1, 1));
-        this.logoLabel = new JLabel("", null, SwingConstants.CENTER);
-        this.logoLabel.setBorder(new EmptyBorder(0, 0, 0, 0));
-        guiPane.add(this.logoLabel);
-        this.guiFrame.setResizable(false);
-        this.guiFrame.addWindowListener(cHandler);
+	final CloseHandler cHandler = new CloseHandler();
+	if (Support.inDebugMode()) {
+	    this.guiFrame = new JFrame(DungeonDiver3.getProgramName() + " (DEBUG)");
+	} else {
+	    this.guiFrame = new JFrame(DungeonDiver3.getProgramName());
+	}
+	final Container guiPane = this.guiFrame.getContentPane();
+	this.guiFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+	this.guiFrame.setLayout(new GridLayout(1, 1));
+	this.logoLabel = new JLabel("", null, SwingConstants.CENTER);
+	this.logoLabel.setBorder(new EmptyBorder(0, 0, 0, 0));
+	guiPane.add(this.logoLabel);
+	this.guiFrame.setResizable(false);
+	this.guiFrame.addWindowListener(cHandler);
     }
 
     // Methods
     JFrame getGUIFrame() {
-        if (this.guiFrame.isVisible()) {
-            return this.guiFrame;
-        } else {
-            return null;
-        }
+	if (this.guiFrame.isVisible()) {
+	    return this.guiFrame;
+	} else {
+	    return null;
+	}
     }
 
     public void showGUI() {
-        final Application app = DungeonDiver3.getApplication();
-        app.setInGUI();
-        this.guiFrame.setJMenuBar(app.getMenuManager().getMainMenuBar());
-        this.guiFrame.setVisible(true);
-        app.getMenuManager().setMainMenus();
-        app.getMenuManager().checkFlags();
+	final Application app = DungeonDiver3.getApplication();
+	app.setInGUI();
+	this.guiFrame.setJMenuBar(app.getMenuManager().getMainMenuBar());
+	this.guiFrame.setVisible(true);
+	app.getMenuManager().setMainMenus();
+	app.getMenuManager().checkFlags();
     }
 
     public void hideGUI() {
-        this.guiFrame.setVisible(false);
+	this.guiFrame.setVisible(false);
     }
 
     void updateLogo() {
-        final BufferedImageIcon logo = LogoManager.getLogo();
-        this.logoLabel.setIcon(logo);
-        final Image iconlogo = LogoManager.getIconLogo();
-        this.guiFrame.setIconImage(iconlogo);
-        this.guiFrame.pack();
+	final BufferedImageIcon logo = LogoManager.getLogo();
+	this.logoLabel.setIcon(logo);
+	final Image iconlogo = LogoManager.getIconLogo();
+	this.guiFrame.setIconImage(iconlogo);
+	this.guiFrame.pack();
     }
 
     public boolean quitHandler() {
-        // Check character writeback
-        if (PreferencesManager.areCharacterChangesPermanent()) {
-            PartyManager.writebackCharacters();
-        }
-        final ScenarioManager mm = DungeonDiver3.getApplication()
-                .getScenarioManager();
-        boolean saved = true;
-        int status = JOptionPane.DEFAULT_OPTION;
-        if (mm.getDirty()) {
-            status = ScenarioManager.showSaveDialog();
-            if (status == JOptionPane.YES_OPTION) {
-                saved = mm.saveGame();
-            } else if (status == JOptionPane.CANCEL_OPTION) {
-                saved = false;
-            } else {
-                mm.setDirty(false);
-            }
-        }
-        if (saved) {
-            PreferencesManager.writePrefs();
-            // Run cleanup task
-            try {
-                final File dirToDelete = new File(
-                        System.getProperty("java.io.tmpdir") + File.separator
-                                + "DungeonDiver3");
-                DirectoryUtilities.removeDirectory(dirToDelete);
-            } catch (final Throwable t) {
-                // Ignore
-            }
-        }
-        return saved;
+	// Check character writeback
+	if (PreferencesManager.areCharacterChangesPermanent()) {
+	    PartyManager.writebackCharacters();
+	}
+	final ScenarioManager mm = DungeonDiver3.getApplication().getScenarioManager();
+	boolean saved = true;
+	int status = JOptionPane.DEFAULT_OPTION;
+	if (mm.getDirty()) {
+	    status = ScenarioManager.showSaveDialog();
+	    if (status == JOptionPane.YES_OPTION) {
+		saved = mm.saveGame();
+	    } else if (status == JOptionPane.CANCEL_OPTION) {
+		saved = false;
+	    } else {
+		mm.setDirty(false);
+	    }
+	}
+	if (saved) {
+	    PreferencesManager.writePrefs();
+	    // Run cleanup task
+	    try {
+		final File dirToDelete = new File(
+			System.getProperty("java.io.tmpdir") + File.separator + "DungeonDiver3");
+		DirectoryUtilities.removeDirectory(dirToDelete);
+	    } catch (final Throwable t) {
+		// Ignore
+	    }
+	}
+	return saved;
     }
 
     @Override
@@ -130,45 +126,45 @@ public class GUIManager implements QuitHandler {
     }
 
     private class CloseHandler implements WindowListener {
-        public CloseHandler() {
-            // TODO Auto-generated constructor stub
-        }
+	public CloseHandler() {
+	    // TODO Auto-generated constructor stub
+	}
 
-        @Override
-        public void windowActivated(final WindowEvent arg0) {
-            // Do nothing
-        }
+	@Override
+	public void windowActivated(final WindowEvent arg0) {
+	    // Do nothing
+	}
 
-        @Override
-        public void windowClosed(final WindowEvent arg0) {
-            // Do nothing
-        }
+	@Override
+	public void windowClosed(final WindowEvent arg0) {
+	    // Do nothing
+	}
 
-        @Override
-        public void windowClosing(final WindowEvent arg0) {
-            if (GUIManager.this.quitHandler()) {
-                System.exit(0);
-            }
-        }
+	@Override
+	public void windowClosing(final WindowEvent arg0) {
+	    if (GUIManager.this.quitHandler()) {
+		System.exit(0);
+	    }
+	}
 
-        @Override
-        public void windowDeactivated(final WindowEvent arg0) {
-            // Do nothing
-        }
+	@Override
+	public void windowDeactivated(final WindowEvent arg0) {
+	    // Do nothing
+	}
 
-        @Override
-        public void windowDeiconified(final WindowEvent arg0) {
-            // Do nothing
-        }
+	@Override
+	public void windowDeiconified(final WindowEvent arg0) {
+	    // Do nothing
+	}
 
-        @Override
-        public void windowIconified(final WindowEvent arg0) {
-            // Do nothing
-        }
+	@Override
+	public void windowIconified(final WindowEvent arg0) {
+	    // Do nothing
+	}
 
-        @Override
-        public void windowOpened(final WindowEvent arg0) {
-            // Do nothing
-        }
+	@Override
+	public void windowOpened(final WindowEvent arg0) {
+	    // Do nothing
+	}
     }
 }

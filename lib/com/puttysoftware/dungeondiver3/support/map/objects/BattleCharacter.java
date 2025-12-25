@@ -12,6 +12,6 @@ import com.puttysoftware.dungeondiver3.support.map.generic.GenericBattleCharacte
 public class BattleCharacter extends GenericBattleCharacter {
     // Constructors
     public BattleCharacter(final Creature newTemplate) {
-        super(newTemplate);
+	super(newTemplate);
     }
 }

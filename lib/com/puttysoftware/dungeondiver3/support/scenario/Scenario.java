@@ -15,19 +15,18 @@ public class Scenario {
 
     // Constructors
     public Scenario() {
-        final long random = new RandomRange(0, Long.MAX_VALUE).generateLong();
-        final String randomID = Long.toHexString(random);
-        this.basePath = System.getProperty("java.io.tmpdir") + "DungeonDiver3"
-                + File.separator + randomID
-                + Extension.getScenarioExtensionWithPeriod();
-        final File base = new File(this.basePath);
-        if (!base.exists()) {
-            base.mkdirs();
-        }
+	final long random = new RandomRange(0, Long.MAX_VALUE).generateLong();
+	final String randomID = Long.toHexString(random);
+	this.basePath = System.getProperty("java.io.tmpdir") + "DungeonDiver3" + File.separator + randomID
+		+ Extension.getScenarioExtensionWithPeriod();
+	final File base = new File(this.basePath);
+	if (!base.exists()) {
+	    base.mkdirs();
+	}
     }
 
     // Methods
     public String getBasePath() {
-        return this.basePath;
+	return this.basePath;
     }
 }

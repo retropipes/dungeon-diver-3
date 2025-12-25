@@ -12,31 +12,31 @@ import com.puttysoftware.dungeondiver3.support.creatures.faiths.FaithManager;
 abstract class FaithRandomBaseMonster extends BaseMonster {
     // Constructors
     FaithRandomBaseMonster() {
-        super();
-        this.element = FaithRandomBaseMonster.getInitialElement();
+	super();
+	this.element = FaithRandomBaseMonster.getInitialElement();
     }
 
     @Override
     public boolean randomAppearance() {
-        return false;
+	return false;
     }
 
     @Override
     public boolean randomFaith() {
-        return true;
+	return true;
     }
 
     @Override
     protected BufferedImageIcon getInitialImage() {
-        return null;
+	return null;
     }
 
     private static Element getInitialElement() {
-        return new Element(FaithManager.getRandomFaith());
+	return new Element(FaithManager.getRandomFaith());
     }
 
     @Override
     public void loadMonster() {
-        this.image = this.getInitialImage();
+	this.image = this.getInitialImage();
     }
 }
