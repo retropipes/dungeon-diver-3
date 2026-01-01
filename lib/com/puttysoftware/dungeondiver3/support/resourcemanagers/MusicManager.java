@@ -8,19 +8,20 @@ package com.puttysoftware.dungeondiver3.support.resourcemanagers;
 import java.net.URL;
 import java.nio.BufferUnderflowException;
 
+import org.retropipes.diane.asset.ogg.DianeOggPlayer;
+
 import com.puttysoftware.dungeondiver3.support.Support;
-import com.puttysoftware.dungeondiver3.support.media.Media;
 
 public class MusicManager {
     private static final String INTERNAL_LOAD_PATH = "/com/puttysoftware/dungeondiver3/support/resources/music/";
     private final static Class<?> LOAD_CLASS = MusicManager.class;
-    private static Media CURRENT_MUSIC;
+    private static DianeOggPlayer CURRENT_MUSIC;
 
-    private static Media getMusic(final String filename) {
+    private static DianeOggPlayer getMusic(final String filename) {
 	try {
 	    final URL url = MusicManager.LOAD_CLASS
 		    .getResource(MusicManager.INTERNAL_LOAD_PATH + filename.toLowerCase() + ".ogg");
-	    return Media.getLoopingResource(url);
+	    return DianeOggPlayer.loadResource(url);
 	} catch (final NullPointerException np) {
 	    return null;
 	}
@@ -38,7 +39,7 @@ public class MusicManager {
 	if (MusicManager.CURRENT_MUSIC != null) {
 	    // Stop the music
 	    try {
-		MusicManager.CURRENT_MUSIC.stopLoop();
+		DianeOggPlayer.stopPlaying();
 	    } catch (final BufferUnderflowException bue) {
 		// Ignore
 	    } catch (final NullPointerException np) {

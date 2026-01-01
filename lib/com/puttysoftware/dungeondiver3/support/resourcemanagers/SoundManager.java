@@ -5,23 +5,14 @@ Any questions should be directed to the author via email at: products@puttysoftw
  */
 package com.puttysoftware.dungeondiver3.support.resourcemanagers;
 
+import org.retropipes.diane.asset.sound.DianeSoundPlayer;
 import org.retropipes.diane.random.RandomRange;
 
-import com.puttysoftware.dungeondiver3.support.media.Media;
 import com.puttysoftware.dungeondiver3.support.prefs.LocalPreferencesManager;
 
 public class SoundManager {
     private static final String INTERNAL_LOAD_PATH = "/com/puttysoftware/dungeondiver3/support/resources/sounds/";
     private final static Class<?> LOAD_CLASS = SoundManager.class;
-
-    private static Media getSound(final String filename) {
-	try {
-	    return Media.getNonLoopingResource(SoundManager.LOAD_CLASS
-		    .getResource(SoundManager.INTERNAL_LOAD_PATH + filename.toLowerCase() + ".wav"));
-	} catch (final NullPointerException np) {
-	    return null;
-	}
-    }
 
     public static void playSound(final int soundID) {
 	if (LocalPreferencesManager.getSoundsEnabled()) {
@@ -38,10 +29,8 @@ public class SoundManager {
 		    break;
 		}
 		final String soundName = SoundNames.getSoundNames()[soundID + offset];
-		final Media snd = SoundManager.getSound(soundName);
-		if (snd != null) {
-		    snd.start();
-		}
+		DianeSoundPlayer.playSource(SoundManager.LOAD_CLASS
+			.getResource(SoundManager.INTERNAL_LOAD_PATH + soundName.toLowerCase() + ".wav"));
 	    } catch (final ArrayIndexOutOfBoundsException aioob) {
 		// Do nothing
 	    }
