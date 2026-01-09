@@ -14,4 +14,7 @@ module com.puttysoftware.dungeondiver3 {
     requires org.retropipes.diane.storage;
     requires org.retropipes.diane.update;
     requires java.desktop;
+
+    uses javax.sound.sampled.spi.AudioFileReader;
+    uses javax.sound.sampled.spi.FormatConversionProvider;
 }
